@@ -1,4 +1,5 @@
 .env
+poetry.lock
 idea/
 *__pycache__/
 db/*.db
