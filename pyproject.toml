@@ -1,18 +1,16 @@
 [tool.poetry]
-name = "aiogram3-template"
+name = "football-team-manager"
 version = "0.1.0"
-description = ""
+description = "Распределение игроков на две команды"
 authors = ["aldi <alkin.denis@gmail.com>"]
 readme = "README.md"
-packages = [{include = "aiogram3-template"}]
+packages = [{include = "football-team-manager"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 aiogram = {url = "https://github.com/aiogram/aiogram/archive/refs/heads/dev-3.x.zip"}
 python-dotenv = "^0.21.0"
 loguru = "^0.6.0"
-fastapi = "^0.85.0"
-uvicorn = "^0.18.3"
 SQLAlchemy = "^2.0.4"
 alembic = "^1.8.1"
 

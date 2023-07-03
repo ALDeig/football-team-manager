@@ -34,7 +34,7 @@ class Config(BaseSettings):
         env_file_encoding = "utf-8"
 
 
-config = Config()
+config = Config()  # type: ignore
 
 
 def logging_setup(skip_loggers_list: list[str] | None = None):
