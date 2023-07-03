@@ -11,14 +11,17 @@ async def set_commands(bot: Bot, config: Config):
     user_commands = [BotCommand(command="start", description="В начало")]
     await bot.set_my_commands(
         commands=user_commands,
-        scope=BotCommandScopeDefault()
+        scope=BotCommandScopeDefault()  # type: ignore
     )
     admin_commands = [
         BotCommand(command="start", description="В начало")
     ]
     for admin_id in config.admins:
         try:
-            await bot.set_my_commands(commands=admin_commands, scope=BotCommandScopeChat(chat_id=admin_id))
+            await bot.set_my_commands(
+                commands=admin_commands,
+                scope=BotCommandScopeChat(chat_id=admin_id)  # type: ignore
+            )
         except TelegramBadRequest:
             logging.error(f"Can't set commands to admin with ID {admin_id}")
 
