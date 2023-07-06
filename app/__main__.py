@@ -5,8 +5,8 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.fsm.storage.memory import MemoryStorage
 # from aiogram.fsm.storage.redis import RedisStorage
 
-from configreader import config, logging_setup
-from commands import set_commands
+from app.configreader import config, logging_setup
+from app.commands import set_commands
 from app.src.dialogs.handlers import admin, user
 from app.src.middleware.db import DbSessionMiddleware
 from app.src.services.db.db_connect import create_session_factory

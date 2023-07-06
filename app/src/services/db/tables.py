@@ -1,4 +1,6 @@
-from sqlalchemy import Float
+from uuid import uuid4
+
+from sqlalchemy import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.src.services.db.base import Base
@@ -6,9 +8,9 @@ from app.src.services.db.base import Base
 
 class Player(Base):
     __tablename__ = "players"
-    name: Mapped[str] = mapped_column(primary_key=True)
-    level: Mapped[float] = mapped_column(Float)
-
+    id: Mapped[str] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    level: Mapped[float]
 
 # class ShippingCart(Base):
 #     __tablename__ = "shipping_cart"
