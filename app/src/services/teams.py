@@ -1,5 +1,5 @@
 from collections import defaultdict
-from random import randint
+from random import randint, shuffle
 
 from app.src.services.db.tables import Player
 
@@ -17,9 +17,9 @@ def create_teams(players: list[Player], selected_players: list[str]) -> tuple[st
 
 
 def _create_text(team_number: int, team: list[str]) -> str:
-    text = f"Команда {team_number}\nКоличество игроков: {len(team)}\n"
+    text = f"Команда {team_number}\nКоличество игроков: {len(team)}\n\n"
     for player_name in team:
-        text += f"{player_name}\n"
+        text += f"<b>{player_name}</b>\n"
     return text
 
 
@@ -29,13 +29,14 @@ def _form_teams(players: dict[str, float]) -> tuple[list[str], list[str]]:
     players_by_levels = defaultdict(list)
     for name, level in players.items():
         players_by_levels[level].append(name)
-
     levels = sorted(players_by_levels, reverse=True)
     for level in levels:
         players_by_level = players_by_levels[level]
         for _ in range(len(players_by_level)):
             selected_player = players_by_level.pop(randint(0, len(players_by_level) - 1))
             _append_player_in_team(team_1, team_2, players, selected_player)
+    shuffle(team_1)
+    shuffle(team_2)
     return team_1, team_2
 
 
