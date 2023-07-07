@@ -5,6 +5,7 @@ from aiogram.types import CallbackQuery, Message
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.src.dialogs.keyboards.kb_create_team import kb_select_players
+from app.src.dialogs.keyboards.user import kb_again_shuffle_teams
 from app.src.services.db import db_requests
 from app.src.services.teams import create_teams
 
@@ -27,17 +28,20 @@ async def cmd_create_teams(msg: Message, db: AsyncSession, state: FSMContext):
     await state.set_state("select_players")
 
 
-@router.callback_query(StateFilter("select_players"), F.data == "finish")
+@router.callback_query(
+    StateFilter("select_players"),
+    F.data.in_(("finish", "again_shuffle"))
+)
 async def btn_finish_players_select(call: CallbackQuery, state: FSMContext):
     if call.message is None: return
     data = await state.get_data()
     text_1, text_2 = create_teams(data["players"], data["selected_players"])
     await call.message.answer(text_1)
-    await call.message.answer(text_2)
-    await state.clear()
+    await call.message.answer(text_2, reply_markup=kb_again_shuffle_teams())
+    # await state.clear()
 
 
-@router.callback_query(StateFilter("select_players"))  # , F.data.startswich.in_(("add", "remove")))
+@router.callback_query(StateFilter("select_players"))
 async def btn_select_player(call: CallbackQuery, state: FSMContext):
     if call.data is None or call.message is None: return
     action, player_id = call.data.split(":")
