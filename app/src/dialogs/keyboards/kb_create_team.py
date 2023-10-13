@@ -18,7 +18,7 @@ def kb_select_players(
         text = f"{CHECKBOX[player.id in selected_players]} {player.name}"
         callback_data = f"{ACTIONS[player.id in selected_players]}:{player.id}"
         builder.add(InlineKeyboardButton(text=text, callback_data=callback_data))
-    builder.add(InlineKeyboardButton(text="Готово", callback_data="finish"))
+    builder.add(InlineKeyboardButton(text="✅ Готово", callback_data="finish"))
     builder.adjust(2)
     return builder.as_markup()
 

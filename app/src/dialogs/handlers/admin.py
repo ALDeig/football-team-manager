@@ -9,7 +9,7 @@ from app.src.services.admin import (
     add_new_player,
     delete_player_by_id,
     reply_kb_for_select_player,
-    update_player_level
+    update_player_level,
 )
 
 
